@@ -16,9 +16,9 @@
             <button id="yesButton" onclick="yesClicked()">Yes!</button>
             <button id="noButton" onclick="noClicked()">No, sorry!</button>
         </div>
-        <!-- Add a hidden div to show the GIF after 'Yes' is clicked -->
+        <!-- This will hold the GIF after 'No' is clicked -->
         <div id="gifContainer" style="display:none;">
-            <img src="https://media.tenor.com/LGXVwQg0cb0AAAAM/%EB%AA%A8%EC%B0%8C%EB%83%A5.gif" alt="Yay GIF" id="yayGif">
+            <img src="" alt="Yay GIF" id="yayGif">
         </div>
     </div>
 
@@ -37,7 +37,52 @@
             "You're the best, say Yes!"
         ];
 
+        // List of different GIF URLs
+        const gifs = [
+            "https://media.tenor.com/lDMve-IMXY8AAAAM/spongebob-squarepants-begging.gif",
+            "https://i.giphy.com/MFIsOqzodLr7ewnkUb.webp",
+            "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnV4MG5hdnN0cDUyZXY0bW4wOGsyZ3EwMjI2a2pvdmJ4cDIyODFkaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/y6lu312reRzVC46yFn/giphy.gif",
+            "https://i.makeagif.com/media/4-24-2017/GLMmDT.gif",
+            "https://media.tenor.com/esprFaACWL8AAAAM/jerry-beg.gif",
+			"https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTU2c3g1eW5weDRsdWFkd3J4NGN0OXV3bGI1MzB6ODJxNTFqNmdnaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/I1nwVpCaB4k36/giphy.gif",
+			"https://i.imgflip.com/4mpvu1.gif",
+            "https://media.tenor.com/DJBXMHz9sHIAAAAM/alvin-and-the-chipmunks-alvin.gif",
+            "https://www.reef2reef.com/attachments/1675181193046-gif.2999680/",
+            "https://gifdb.com/images/thumbnail/bugs-bunny-saying-please-2qfynyegpog9bm84.gif",
+			"https://i.pinimg.com/originals/27/b5/0a/27b50a0994c910df8f495cf8311e3eff.gif",
+        ];
+
+        // List of different GIF URLs for "Yes" clicks
+        const yesGifs = [
+            "https://www.micechat.com/wp-content/uploads/2024/02/stitch-Thank-you-gif.gif",
+        ];
+
+ // Arrays to keep track of used GIFs
+        let usedNoGifs = [];
+        let usedYesGifs = [];
+
+        // Function to get a random GIF that has not been used
+        function getRandomGif(gifList, usedList) {
+            // Filter out used GIFs from the list
+            const availableGifs = gifList.filter(gif => !usedList.includes(gif));
+            
+            // If all GIFs have been used, reset the used list and start over
+            if (availableGifs.length === 0) {
+                usedList.length = 0; // Reset the used list
+                return getRandomGif(gifList, usedList); // Try again
+            }
+
+            // Randomly select a GIF from the remaining available GIFs
+            const randomGif = availableGifs[Math.floor(Math.random() * availableGifs.length)];
+            usedList.push(randomGif); // Add it to the used list
+            return randomGif;
+        }
+		
         function yesClicked() {
+            // Show a random GIF from the "Yes" GIF list
+            const randomYesGif = yesGifs[Math.floor(Math.random() * yesGifs.length)];
+            document.getElementById("yayGif").src = randomYesGif;
+
             // Show the GIF after the "Yes" button is clicked
             document.getElementById("gifContainer").style.display = "block";
             // Hide the "Yes" button and show the heart emoji
@@ -54,6 +99,15 @@
             let scaleValue = 1 + (noClickCount * 0.2); // Increase scale with each "No"
             document.getElementById("yesButton").style.transform = `scale(${scaleValue})`;
 
+            // Select a random GIF from the list and display it
+            const randomGif = gifs[Math.floor(Math.random() * gifs.length)];
+            document.getElementById("yayGif").src = randomGif;
+
+            // Show the GIF container if it's the first "No" click
+            if (noClickCount === 1) {
+                document.getElementById("gifContainer").style.display = "block";
+            }
+
             // If "No" has been clicked 10 times, change behavior
             if (noClickCount >= 10) {
                 document.getElementById("noButton").style.display = "none"; // Hide the "No" button
@@ -67,3 +121,4 @@
     </script>
 </body>
 </html>
+
