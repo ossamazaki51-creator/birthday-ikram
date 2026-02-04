@@ -1,0 +1,52 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 100px;
+}
+
+h2 {
+    color: #e74c3c;
+    font-size: 30px;
+    margin: 20px 0;
+}
+
+.buttons button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Added transition for smooth scaling */
+}
+
+.buttons button:hover {
+    background-color: #c0392b;
+}
+
+.buttons button#yesButton {
+    transition: transform 0.3s ease-in-out;  /* Smooth transition for scaling */
+}
+
+#yayGif {
+    width: 300px; /* Adjust the GIF size if needed */
+    margin-top: 20px;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday IKRAM!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="heart" id="heartEmoji">
+            <h1>❤️</h1>
+        </div>
+        <h2 id="messageText">Happy Birthday IKRAM, will you stay my best friend forever?</h2>
+        <div class="buttons">
+            <button id="yesButton" onclick="yesClicked()">Yes!</button>
+            <button id="noButton" onclick="noClicked()">No, sorry!</button>
+        </div>
+        <!-- Add a hidden div to show the GIF after 'Yes' is clicked -->
+        <div id="gifContainer" style="display:none;">
+            <img src="https://media.tenor.com/LGXVwQg0cb0AAAAM/%EB%AA%A8%EC%B0%8C%EB%83%A5.gif" alt="Yay GIF" id="yayGif">
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        const noMessages = [
+            "Please say Yes! You're my best friend!",
+            "Don't leave me hanging! Say Yes!",
+            "Come on, you're the best! Say Yes!",
+            "I really need you as my best friend, say Yes!",
+            "You know you want to! Say Yes!",
+            "Please sweettyy, please, please say Yes!",
+            "You're my heroine, just say Yes!",
+            "We’re meant to be best friends, say Yes!",
+            "I can't imagine life without you, say Yes!",
+            "You're the best, say Yes!"
+        ];
+
+        function yesClicked() {
+            // Show the GIF after the "Yes" button is clicked
+            document.getElementById("gifContainer").style.display = "block";
+            // Hide the "Yes" button and show the heart emoji
+            document.getElementById("yesButton").style.display = "none";
+            document.getElementById("heartEmoji").style.display = "block";
+            // Change the message text
+            document.getElementById("messageText").innerHTML = "Thaaaaanks sweeetyyy, lvyyyyyyy";
+        }
+
+        function noClicked() {
+            noClickCount++;
+
+            // Grow the "Yes" button progressively
+            let scaleValue = 1 + (noClickCount * 0.2); // Increase scale with each "No"
+            document.getElementById("yesButton").style.transform = `scale(${scaleValue})`;
+
+            // If "No" has been clicked 10 times, change behavior
+            if (noClickCount >= 10) {
+                document.getElementById("noButton").style.display = "none"; // Hide the "No" button
+                document.getElementById("yesButton").style.transform = "scale(10)"; // Make the "Yes" button full-screen
+            } else {
+                // Change the "No" button text to a new request
+                document.getElementById("noButton").innerHTML = noMessages[noClickCount % noMessages.length];
+                document.getElementById("noButton").style.backgroundColor = "#f39c12"; // Color change for emphasis
+            }
+        }
+    </script>
+</body>
+</html>
